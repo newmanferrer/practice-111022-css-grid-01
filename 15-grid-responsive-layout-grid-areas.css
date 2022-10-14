@@ -1,0 +1,84 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+
+  display: grid;
+  grid-auto-flow: row;
+  grid-auto-rows: auto;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(5, auto);
+  grid-template-areas:
+    'header          header          header          header         header         header'
+    'nav             nav             nav             nav            nav            nav'
+    'uc-left         uc-left         uc-center       uc-center      uc-right       uc-right'
+    'middle-content  middle-content  middle-content  lower-content  lower-content  lower-content'
+    'footer          footer          footer          footer         footer         footer';
+
+  background-color: #222;
+}
+
+.header {
+  grid-area: header;
+  background-color: lightseagreen;
+}
+
+.nav {
+  grid-area: nav;
+  background-color: whitesmoke;
+}
+
+.uc-left {
+  grid-area: uc-left;
+  background-color: lightgreen;
+}
+
+.uc-center {
+  grid-area: uc-center;
+  background-color: lightblue;
+}
+
+.uc-right {
+  grid-area: uc-right;
+  background-color: lightpink;
+}
+
+.middle-content {
+  grid-area: middle-content;
+  background-color: lightslategrey;
+}
+
+.lower-content {
+  grid-area: lower-content;
+  background-color: lightcoral;
+}
+
+.footer {
+  grid-area: footer;
+  background-color: lightseagreen;
+}
+
+@media screen and (min-width: 1024px) {
+  body {
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, auto);
+    grid-template-areas:
+      'header  header          header          header          header'
+      'nav     uc-left         uc-center       uc-center       uc-right'
+      'nav     middle-content  middle-content  middle-content  middle-content'
+      'nav     lower-content   lower-content   lower-content   lower-content'
+      'footer  footer          footer          footer          footer';
+  }
+}

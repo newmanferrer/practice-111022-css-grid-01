@@ -1,0 +1,121 @@
+/* 
+fill -> llenar
+auto-fill: Llena la fila con tantas columnas como puedan caber.
+           Crea columnas implicitas cada vez que pueda caber una. 
+           Las columnas recién agregadas pueden estar vacías, pero
+           seguirán ocupando un espacio designado en la fila.
+           El navegador permitirá que las columnas vacías ocupen espacio en la fila
+           como sus vecinos no vacíos; se les asignará una fracción del espacio incluso
+           si no tienen elementos de cuadrícula, lo que afectará el tamaño/ancho de este último.
+
+fit -> adaptar o ajustar
+auto-fit: Adapta o ajusta las columnas actualmente disponibles en el espacio,
+          expandiéndolas para que ocupen cualquier espacio disponible. El navegador
+          hace eso después de LLENAR ese espacio adicional con columnas adicionales
+          (como con auto-fill) y luego colapsar las vacías.
+          El contenido se estirará para llenar todo el ancho de la fila.
+
+Nota: Un consejo útil para recordar aquí es que las columnas agregadas en ambos casos 
+      (fill o fit, ya sea colapsadas o no) no son columnas implícitas, eso tiene un
+      significado específico en la especificación. En nuestro caso, estamos agregando/creando
+      columnas en la grilla explícita de la misma manera que si declaráramos que queremos
+      12 columnas, por ejemplo. Por lo tanto, el número de columna -1 funcionará para apuntar
+      al final de esta cuadrícula, lo que no sucede si está creando columnas en la cuadrícula implícita. 
+*/
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: #ffffff;
+}
+
+body {
+  width: 100vw;
+  padding: 1rem;
+
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #222;
+}
+
+.title {
+  width: 90%;
+
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.subtitle {
+  width: 90%;
+
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.subtitle-h3 {
+  width: 70%;
+  margin: 1.5rem 0 1rem;
+
+  font-size: 1.5rem;
+}
+
+.container,
+.container-2,
+.container-3,
+.container-4,
+.container-5 {
+  width: 70%;
+  height: 150px;
+
+  display: grid;
+  grid-auto-flow: row;
+  grid-auto-rows: auto;
+
+  background-color: #bd83d7;
+}
+
+.container__item,
+.container-2__item,
+.container-3__item,
+.container-4__item,
+.container-5__item {
+  padding: 1rem;
+
+  border: 1px solid orangered;
+  background-color: #f7941f;
+}
+
+.container {
+  grid-template-columns: repeat(4, 100px);
+}
+
+.container-2 {
+  grid-template-columns: repeat(auto-fill, 100px);
+}
+
+.container-3 {
+  grid-template-columns: repeat(auto-fit, 100px);
+}
+
+.container-4 {
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+}
+
+.container-5 {
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+}

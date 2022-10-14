@@ -1,0 +1,105 @@
+/* 
+Sizing Keywords
+1.- fr (fractional units): Portion of the remaining space => Example: 1fr 3fr = 25% 75%. fr has higher priority than auto
+2.- auto: This keyword is a lot like fr units, except that they “lose” the fight in sizing against fr units when allocating the remaining space.
+3.- min-content: The minimum size of the content. Imagine a line of text like “E pluribus unum”, the min-content is likely the width of the word “pluribus”.
+4.- max-content: The maximum size of the content. Imagine the sentence above, the max-content is the length of the whole sentence.
+
+Sizing Functions
+1.- fit-content(100px): Use the space available, but never less than min-content and never more than max-content.
+2.- minmax(min value, max value): Can use sizes (px, rem, %, vw, etc), sizing keywords and functions.
+*/
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: #ffffff;
+}
+
+body {
+  width: 100vw;
+  padding: 1rem;
+
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #222;
+}
+
+.title {
+  width: 90%;
+
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.subtitle {
+  width: 90%;
+
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.container {
+  width: 80%;
+  height: 60%;
+  margin: 1rem auto;
+
+  display: grid;
+  grid-auto-flow: row;
+  grid-auto-rows: 100px;
+
+  /* 3 columns that take up all available space (row axis)*/
+  /* fr has higher priority than auto */
+  grid-template-columns: repeat(3, 1fr);
+
+  /* similar to fr: 3 columns that take up all available space (row axis)*/
+  /* fr has higher priority than auto */
+  grid-template-columns: repeat(3, auto);
+
+  /* min-content: example content = Item 1, the min-content is the word "Item" */
+  grid-template-columns: repeat(3, min-content);
+
+  /* max-content: example content = Item 1, the max-content is "Item 1" */
+  grid-template-columns: repeat(3, max-content);
+
+  /* fit-content(100px): example content = Item 1 */
+  /* the min-content is the word "Item" and the max-content is "Item 1" */
+  /* no matter the size use in this case 100px =>  fit-content(100px) */
+  grid-template-columns: repeat(3, fit-content(100px));
+
+  grid-template-columns: 1fr auto min-content max-content fit-content(50px) minmax(50px, 100px);
+
+  /* minmax(min value, max value)): example minmax(100px, 150px) */
+  grid-template-columns: repeat(3, minmax(100px, 150px));
+  grid-template-columns: repeat(3, minmax(50px, 1fr));
+  grid-template-columns: repeat(3, minmax(3rem, 5rem));
+  grid-template-columns: repeat(3, minmax(min-content, 100px));
+  grid-template-columns: repeat(3, minmax(min-content, max-content));
+  grid-template-columns: repeat(3, minmax(50px, max-content));
+  grid-template-columns: repeat(3, minmax(max-content, 150px));
+  grid-template-columns: repeat(3, minmax(max-content, min-content));
+
+  background-color: #bd83d7;
+}
+
+.container__item {
+  padding: 1rem;
+
+  border: 1px solid orangered;
+  background-color: #f7941f;
+}
